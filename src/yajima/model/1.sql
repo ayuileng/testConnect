@@ -27,3 +27,4 @@ create table teachers_students(
 	constraint teacher_id_fk foreign key(t_id) references teachers(id),
 	constraint student_id_fk foreign key(s_id) references students(id)
 	);
+print:heheda
