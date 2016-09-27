@@ -1,5 +1,6 @@
 package main;
 
+import org.junit.Test;
 import org.wltea.analyzer.core.IKSegmenter;
 import org.wltea.analyzer.core.Lexeme;
 import java.io.*;
@@ -149,17 +150,43 @@ public class Main {
     }
 
     //计算最终的TF-IDF
+//    private static Set<String> stopwords = new HashSet<>();//stopword集合
+//    private static List<ArrayList<File> > dirs = new ArrayList<>();//所有txt对应的File对象
+//    private static HashSet<String> allWords = new HashSet<>();//所有的词
+//    private static ArrayList<TreeMap<String,Double>> allTXT = new ArrayList<>();//其中每一项对应的是一个文档的词频数据
+//    private static TreeMap<String,Double> wordOccurTimes = new TreeMap<>();//每个单词总共出现在多少篇文章中
+//    private static ArrayList<TreeMap<String,Double>> TF_IDF = new ArrayList<>();//最终的结果矩阵
     private static void computeTFIDF(){
         readStopWords();
         readAllFiles();
         processEachFile();
         computTF(allTXT);
         computIDF(wordOccurTimes);
+//        for (TreeMap<String, Double> m :
+//               allTXT
+//             ) {
+//            TreeMap<String,Double> temp = new TreeMap<>();
+//            for (Map.Entry<String,Double> e:
+//                    wordOccurTimes.entrySet()) {
+//
+//                temp.put(e.getKey(),e.getValue());
+//                for (String word:
+//                    temp.keySet()) {
+//                if(m.keySet().contains(word)){
+//                    temp.put(word,temp.get(word) * m.get(word));
+//                }else {
+//                    temp.put(word,0.0);
+//                }
+//            }
+//            }
+//            TF_IDF.add(temp);
+//        }
+
         for (TreeMap<String, Double> m :
                 allTXT) {
             TreeMap<String,Double> res = new TreeMap<>(wordOccurTimes);
             for (String word:
-                 res.keySet()) {
+                    res.keySet()) {
                 if(m.keySet().contains(word)){
                     res.put(word,res.get(word) * m.get(word));
                 }else {
